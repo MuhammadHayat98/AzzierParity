@@ -10,7 +10,12 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+use Illuminate\Http\Request;
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->get('/response', function(Request $res) { 
+    return $res->all();
 });
