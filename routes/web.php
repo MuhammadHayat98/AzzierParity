@@ -11,11 +11,11 @@
 |
 */
 use Illuminate\Http\Request;
-
+use GrahamCampbell\Flysystem\Facades\Flysystem;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
 $router->get('/response', function(Request $res) { 
-    return $res->all();
+    Flysystem::put('hi.txt', $res->all());
 });
