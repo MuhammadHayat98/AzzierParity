@@ -11,11 +11,20 @@
 |
 */
 use App\Workorder as Workorder;
+use App\WorkRequest as WorkRequest;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/find', function () use ($router) {
-    $wo = Workorder::find(14);
-    return $wo['Status'];
+//Workorder model test
+$router->get('/findWo/{Wo}', function (int $Wo) use ($router) {
+    $wo = Workorder::find($Wo);
+    return $wo->toJson();
+});
+
+//Workrequest model test
+$router->get('/findWr/{Wr}', function (String $Wr) use ($router) {
+    $wr = WorkRequest::find($Wr);
+    return $wr->toJson();
 });

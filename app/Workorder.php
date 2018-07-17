@@ -1,4 +1,8 @@
 <?php
+//todo
+/*
+* change class name to WorkOrder to keep our naming conventions standard
+*/
 namespace App;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
@@ -8,7 +12,9 @@ class Workorder extends Eloquent {
 
     protected $fillable = [
         'WoNum', 'WoNumStr', 'OpenDate', 'CompDate',
-        'Priority', 'Status'
+        'Priority'
     ];
+
+    
 
 }
