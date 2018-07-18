@@ -16,6 +16,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/response', function(Request $res) { 
-    Flysystem::put('hi.txt', $res->all());
+$router->post('/response', function(Request $res) use ($router) { 
+    Flysystem::put('response.xml', $res->getContent());
 });
