@@ -1,19 +1,24 @@
 <?php
-//todo
-/*
-* change class name to WorkOrder to keep our naming conventions standard
-*/
+
 namespace App;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Workorder extends Eloquent {
+class WorkOrder extends Eloquent {
     protected $collection = 'WorkOrder';
     protected $primaryKey = 'WoNum';
-
+    public $timestamps = false;
+    //setting fields to dates does not work as of now but maybe I'll fix it someday :/
+    protected $dates = ['OpenDate'];
     protected $fillable = [
-        'WoNum', 'WoNumStr', 'OpenDate', 'CompDate',
-        'Priority'
+        'WoNum', 'WoNumStr','Priority', 
+        'OpenDate', 'ContactPhone', 'Craft',
+        'CreateDate', 'Crew', 'Location', 
+        'LocationDesc', 'Note2', 'Request',
+        'Status', 'Room', 'WoType'
+
     ];
+
+    
 
     
 
