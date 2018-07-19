@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\Response;
+
 class WorkOrders extends Controller
 {
       /**
@@ -39,7 +39,7 @@ class WorkOrders extends Controller
            'Request' => (string)$WoRequestObj->{'Request'},
            'Status' => (string)$WoRequestObj->{'Status'},
            'Room' => (string)$WoRequestObj->{'Room'},
-           'WoType' => (string)$WoRequestObj->{'WoType'}, 
+           'WoType' => (string)$WoRequestObj->{'WoType'} 
         ]);
         $newWo->save();
 

@@ -12,9 +12,9 @@ class WorkOrder extends Eloquent {
     protected $fillable = 
         'WoNum', 'WoNumStr','Priority', 
         'OpenDate', 'ContactPhone', 'Craft',
-        'Crew', 'Location', 
-        'LocationDesc', 'Note2', 'Request',
-        'Status', 'Room', 'WoType'
+        'Crew', 'Location','LocationDesc', 
+        'Note2', 'Request','Status', 
+        'Room', 'WoType'
 
     ];
 
