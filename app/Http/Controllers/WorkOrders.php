@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class WorkOrders extends Controller
 {
       /**
@@ -38,5 +38,6 @@ class WorkOrders extends Controller
            'WoType' => $WoRequestObj->{'WoType'}, 
         ]);
         $newWo->save();
+
     }
 }
