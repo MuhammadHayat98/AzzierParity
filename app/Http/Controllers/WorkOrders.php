@@ -18,10 +18,10 @@ class WorkOrders extends Controller
         //
     }
     public function create(Request $request) {
-        $response = [
-            'message' => 'yeet',
-            'Status' => 201
-        ];
+        // $response = [
+        //     'message' => 'yeet',
+        //     'Status' => 201
+        // ];
         $newWo = new WorkOrder;
         $WoRequestObj = $request->get('WorkOrder');
         $openDate = (string)$WoRequestObj->{'OpenDate'};
@@ -43,6 +43,6 @@ class WorkOrders extends Controller
            'WoType' => (string)$WoRequestObj->{'WoType'}, 
         ]);
         $newWo->save();
-        return response()->json($response);
+
     }
 }
