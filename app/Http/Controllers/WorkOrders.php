@@ -24,7 +24,7 @@ class WorkOrders extends Controller
            'WoNum' => $WoRequestObj->{'WoNum'},
            'WoNumStr' => $WoRequestObj->{'WoNumStr'},
            'Priority' => $WoRequestObj->{'Priority'},
-           'OpenDate' => $WoRequestObj->{'OpenDate'},
+           'OpenDate' => '2018-07-19 00:00:00.000',
            'ContactPhone' => $WoRequestObj->{'ContactPhone'},
            'Craft' => $WoRequestObj->{'Craft'},
            'CreateDate' => $WoRequestObj->{'CreateDate'},
