@@ -46,8 +46,8 @@ class WorkOrders extends Controller
 
     }
 
-    public update(Request $request) {
-        $wo = new WorkOrder;
-        $wo::find();
-    }
+    // public function update(Request $request) {
+    //     $wo = new WorkOrder;
+    //     $wo::find();
+    // }
 }
