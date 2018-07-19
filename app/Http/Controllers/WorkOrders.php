@@ -22,9 +22,9 @@ class WorkOrders extends Controller
         $WoRequestObj = $request->get('WorkOrder');
         $newWo::create([
            'WoNum' => (int)$WoRequestObj->{'WoNum'},
-           'WoNumStr' => (string)$WoRequestObj->{'WoNum'},
+           'WoNumStr' => (string)(int)$WoRequestObj->{'WoNum'},
            'Priority' => (int)$WoRequestObj->{'Priority'},
-           'OpenDate' => $WoRequestObj->{'OpenDate'},
+           'OpenDate' => Carbon::createFromTimeString((string)$WoRequestObj->{'OpenDate'}, 'PST'),
            'ContactPhone' => (string)$WoRequestObj->{'ContactPhone'},
            'Craft' => $WoRequestObj->{'Craft'},
            'CreateDate' => $WoRequestObj->{'CreateDate'},
