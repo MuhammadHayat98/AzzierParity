@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Laravel\Lumen\Routing\Controller as BaseController;
-use App\WorkOrder;
+namespace App\Http\Controllers;
+use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 
-class WorkOrders extends BaseController
+class WorkOrders extends Controller
 {
+      /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
     public function create(Request $request) {
-        $newWo = new App\WorkOrder();
+        $newWo = new WorkOrder();
         $WoRequestObj = $request->get('WorkOrder');
         $newWo::create([
            'WoNum' => $WoRequestObj->{'WoNum'},

@@ -10,9 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-use App\WorkOrder as WorkOrder;
-use App\WorkRequest as WorkRequest;
-use Carbon\Carbon;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
