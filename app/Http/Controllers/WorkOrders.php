@@ -21,21 +21,21 @@ class WorkOrders extends Controller
         $newWo = new WorkOrder();
         $WoRequestObj = $request->get('WorkOrder');
         $newWo::create([
-           'WoNum' => $WoRequestObj->{'WoNum'},
+           'WoNum' => (int)$WoRequestObj->{'WoNum'},
            'WoNumStr' => (string)$WoRequestObj->{'WoNum'},
-           'Priority' => $WoRequestObj->{'Priority'},
+           'Priority' => (int)$WoRequestObj->{'Priority'},
            'OpenDate' => $WoRequestObj->{'OpenDate'},
-            'ContactPhone' => $WoRequestObj->{'ContactPhone'},
-            'Craft' => $WoRequestObj->{'Craft'},
-            'CreateDate' => $WoRequestObj->{'CreateDate'},
-            'Crew' => $WoRequestObj->{'Crew'},
-            'Location' => $WoRequestObj->{'Location'},
-            'LocationDesc' => $WoRequestObj->{'LocationDesc'},
-            'Note2' => $WoRequestObj->{'Note2'},
-            'Request' => $WoRequestObj->{'Request'},
-            'Status' => $WoRequestObj->{'Status'},
-            'Room' => $WoRequestObj->{'Room'},
-            'WoType' => $WoRequestObj->{'WoType'}, 
+           'ContactPhone' => $WoRequestObj->{'ContactPhone'},
+           'Craft' => $WoRequestObj->{'Craft'},
+           'CreateDate' => $WoRequestObj->{'CreateDate'},
+           'Crew' => $WoRequestObj->{'Crew'},
+           'Location' => $WoRequestObj->{'Location'},
+           'LocationDesc' => $WoRequestObj->{'LocationDesc'},
+           'Note2' => $WoRequestObj->{'Note2'},
+           'Request' => $WoRequestObj->{'Request'},
+           'Status' => $WoRequestObj->{'Status'},
+           'Room' => $WoRequestObj->{'Room'},
+           'WoType' => $WoRequestObj->{'WoType'}, 
         ]);
         $newWo->save();
     }
