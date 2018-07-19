@@ -6,7 +6,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 
-class WorkOrder extends BaseController
+class WorkOrders extends BaseController
 {
     public function create(Request $request) {
         $newWo = new WorkOrder();
