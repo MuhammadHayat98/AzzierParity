@@ -18,7 +18,7 @@ class WorkOrders extends Controller
         //
     }
     public function create(Request $request) {
-        $newWo = new WorkOrder();
+        $newWo = new WorkOrder;
         $WoRequestObj = $request->get('WorkOrder');
         $newWo::create([
            'WoNum' => (int)$WoRequestObj->{'WoNum'},
