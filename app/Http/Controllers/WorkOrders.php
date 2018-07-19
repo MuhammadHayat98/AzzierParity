@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class WorkOrders extends Controller
 {
       /**
@@ -18,7 +18,7 @@ class WorkOrders extends Controller
         //
     }
     public function create(Request $request) {
-        $newWo = new WorkOrder();
+        $newWo = new WorkOrder;
         $WoRequestObj = $request->get('WorkOrder');
         $newWo::create([
            'WoNum' => (int)$WoRequestObj->{'WoNum'},
