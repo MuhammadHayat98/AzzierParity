@@ -32,7 +32,6 @@ class WorkOrders extends Controller
            'OpenDate' => Carbon::createFromTimeString(substr($openDate,0,19), 'PST')->addHours(-1),
            'ContactPhone' => (string)$WoRequestObj->{'ContactPhone'},
            'Craft' => (string)$WoRequestObj->{'Craft'},
-           'CreateDate' => Carbon::createFromTimeString(substr((string)$WoRequestObj->{'CreateDate'},0,19), 'PST')->addHours(-1),
            'Crew' => (string)$WoRequestObj->{'Crew'},
            'Location' => (string)$WoRequestObj->{'Location'},
            'LocationDesc' => (string)$WoRequestObj->{'LocationDesc'},
