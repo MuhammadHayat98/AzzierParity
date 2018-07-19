@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Response;
 class WorkOrders extends Controller
 {
       /**
@@ -17,6 +18,10 @@ class WorkOrders extends Controller
         //
     }
     public function create(Request $request) {
+        $response = [
+            'message' => 'yeet',
+            'Status' => 201
+        ];
         $newWo = new WorkOrder;
         $WoRequestObj = $request->get('WorkOrder');
         $openDate = (string)$WoRequestObj->{'OpenDate'};
@@ -26,18 +31,18 @@ class WorkOrders extends Controller
            'Priority' => (string)$WoRequestObj->{'Priority'},
            'OpenDate' => Carbon::createFromTimeString(substr($openDate,0,19), 'PST')->addHours(-1),
            'ContactPhone' => (string)$WoRequestObj->{'ContactPhone'},
-           'Craft' => $WoRequestObj->{'Craft'},
-           'CreateDate' => $WoRequestObj->{'CreateDate'},
-           'Crew' => $WoRequestObj->{'Crew'},
-           'Location' => $WoRequestObj->{'Location'},
-           'LocationDesc' => $WoRequestObj->{'LocationDesc'},
-           'Note2' => $WoRequestObj->{'Note2'},
-           'Request' => $WoRequestObj->{'Request'},
-           'Status' => $WoRequestObj->{'Status'},
-           'Room' => $WoRequestObj->{'Room'},
-           'WoType' => $WoRequestObj->{'WoType'}, 
+           'Craft' => (string)$WoRequestObj->{'Craft'},
+           'CreateDate' => (string)$WoRequestObj->{'CreateDate'},
+           'Crew' => (string)$WoRequestObj->{'Crew'},
+           'Location' => (string)$WoRequestObj->{'Location'},
+           'LocationDesc' => (string)$WoRequestObj->{'LocationDesc'},
+           'Note2' => (string)$WoRequestObj->{'Note2'},
+           'Request' => (string)$WoRequestObj->{'Request'},
+           'Status' => (string)$WoRequestObj->{'Status'},
+           'Room' => (string)$WoRequestObj->{'Room'},
+           'WoType' => (string)$WoRequestObj->{'WoType'}, 
         ]);
         $newWo->save();
-
+        return response()->json($response);
     }
 }
