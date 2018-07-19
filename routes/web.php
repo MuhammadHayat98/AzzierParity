@@ -31,7 +31,7 @@ $router->get('/findWr/{Wr}', function (String $Wr) use ($router) {
 
 //Workorder create test
 $router->post('/CreateWo', [
-    'middleware' => 'parseXml',
+    'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'WorkOrders@create'
 ]);
 
