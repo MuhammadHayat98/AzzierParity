@@ -10,9 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-use App\WorkOrder as WorkOrder;
-use App\WorkRequest as WorkRequest;
-use Carbon\Carbon;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -30,17 +28,10 @@ $router->get('/findWr/{Wr}', function (String $Wr) use ($router) {
 });
 
 //Workorder create test
-$router->get('/CreateWo', function () use ($router) {
-    $wo = new WorkOrder();
-    $wo::create([
-        'WoNum' => 999999,
-        'WoNumStr' => '999999',
-        'Priority' => '3',
-        'OpenDate' => Carbon::createFromTimeString('06/25/2018 00:00:00', 'GMT')
-
-    ]);
-    $wo->save();
-});
+$router->post('/CreateWo', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkOrders@create'
+]);
 
 // //Workorder update test
 // $router->get('/findWo/{Wo}', function (int $Wo) use ($router) {
