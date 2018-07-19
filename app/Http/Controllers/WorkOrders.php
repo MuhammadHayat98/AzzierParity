@@ -22,7 +22,7 @@ class WorkOrders extends Controller
         $WoRequestObj = $request->get('WorkOrder');
         $newWo::create([
            'WoNum' => $WoRequestObj->{'WoNum'},
-           'WoNumStr' => $WoRequestObj->{'WoNumStr'},
+           'WoNumStr' => (string)$WoRequestObj->{'WoNum'},
            'Priority' => $WoRequestObj->{'Priority'},
            'OpenDate' => '2018-07-19 00:00:00.000',
            'ContactPhone' => $WoRequestObj->{'ContactPhone'},
