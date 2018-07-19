@@ -8,7 +8,7 @@ class WorkOrder extends Eloquent {
     protected $primaryKey = 'WoNum';
     public $timestamps = false;
     //setting fields to dates does not work as of now but maybe I'll fix it someday :/
-    protected $dates = ['OpenDate', 'ModifyDate'];
+    protected $dates = ['OpenDate'];
     protected $fillable = 
         'WoNum', "WoNumStr",'Priority', 
         'OpenDate', 'ContactPhone', 'Craft',
