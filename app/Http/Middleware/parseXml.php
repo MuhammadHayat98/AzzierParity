@@ -15,7 +15,7 @@ class parseXml
      */
     public function handle($request, Closure $next)
     {   
-        $xmlStr = trim(file_get_contents($request->getContent());
+        $xmlStr = trim(file_get_contents($request->getContent()));
         $xml = new \SimpleXMLElement($xmlStr);
         $WorkorderObj = $xml->{'WorkOrder'};
         $request->attributes->set('WorkOrder', $WorkorderObj);
