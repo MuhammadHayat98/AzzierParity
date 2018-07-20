@@ -50,7 +50,6 @@ class WorkOrders extends Controller
 
     public function update(Request $request) {
         $WoObj = $request->get('WorkOrder');
-
         $modifyDateStr = (string)$WoObj->{'ModifyDate'};
         $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
         $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
