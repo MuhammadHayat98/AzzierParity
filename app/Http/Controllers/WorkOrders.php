@@ -26,12 +26,13 @@ class WorkOrders extends Controller
         // ];
         $newWo = new WorkOrder;
         $WoRequestObj = $request->get('WorkOrder');
-        $openDate = (string)$WoRequestObj->{'OpenDate'};
+        $openDateStr = (string)$WoRequestObj->{'OpenDate'};
+        $openDateCarbon = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
         $newWo::create([
            'WoNum' => (int)$WoRequestObj->{'WoNum'},
            'WoNumStr' => (string)(int)$WoRequestObj->{'WoNum'},
            'Priority' => (string)$WoRequestObj->{'Priority'},
-           'OpenDate' => Carbon::createFromTimeString(substr($openDate,0,19), 'PST')->addHours(-1),
+           'OpenDate' => $openDateCarbon,
            'ContactPhone' => (string)$WoRequestObj->{'ContactPhone'},
            'Craft' => (string)$WoRequestObj->{'Craft'},
            'Crew' => (string)$WoRequestObj->{'Crew'},
@@ -49,7 +50,7 @@ class WorkOrders extends Controller
 
     public function update(Request $request) {
         $WoObj = $request->get('WorkOrder');
-        $openDate = (string)$WoObj->{'OpenDate'};
+
         $modifyDateStr = (string)$WoObj->{'ModifyDate'};
         $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
         $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
