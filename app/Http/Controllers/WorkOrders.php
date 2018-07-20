@@ -52,7 +52,19 @@ class WorkOrders extends Controller
         $openDate = (string)$WoObj->{'OpenDate'};
         $modifyDate = (string)$WoObj->{'ModifyDate'};
         $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
+        //update function has this many lines because azzier does not let us know what fiels specifically have been updated
         $wo->ModifyDate = Carbon::createFromTimeString(substr($modifyDate,0,19), 'PST')->addHours(-1);
+        $wo->Priority = (string)$WoObj->{'Priority'};
+        $wo->ContactPhone = (string)$WoObj->{'ContactPhone'};
+        $wo->Craft = (string)$WoObj->{'Craft'};
+        $wo->Crew = (string)$WoObj->{'Crew'};
+        $wo->Location = (string)$WoObj->{'Location'};
+        $wo->LocationDesc = (string)$WoObj->{'LocationDesc'};
+        $wo->Note2 = (string)$WoObj->{'Note2'};
+        $wo->Request = (string)$WoObj->{'Request'};
+        $wo->Status = (string)$WoObj->{'Status'};
+        $wo->Room = (string)$WoObj->{'Room'};
+        $wo->WoType = (string)$WoObj->{'WoType'};
         $wo->save();
         
     }
