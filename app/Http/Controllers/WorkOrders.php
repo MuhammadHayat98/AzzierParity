@@ -55,6 +55,7 @@ class WorkOrders extends Controller
         $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
         //update function has this many lines because azzier does not let us know what fiels specifically have been updated
         $wo->ModifyDate = $modifyDateCarbon;
+        $wo->ModifyBy = (string)$WoObj->{'ModifyBy'};
         $wo->Priority = (string)$WoObj->{'Priority'};
         $wo->ContactPhone = (string)$WoObj->{'ContactPhone'};
         $wo->Craft = (string)$WoObj->{'Craft'};
