@@ -1,6 +1,8 @@
 <?php
-
-
+/*todo
+*change workorder request variable names to the same in both functions
+*
+*/
 namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
@@ -45,8 +47,31 @@ class WorkOrders extends Controller
 
     }
 
-    // public function update(Request $request) {
-    //     $wo = new WorkOrder;
-    //     $wo::find();
-    // }
+    public function update(Request $request) {
+        $WoObj = $request->get('WorkOrder');
+        $openDate = (string)$WoRequestObj->{'OpenDate'};
+        $modifyDate = (string)$WoRequestObj->{'ModifyDate'};
+        $wo = WorkOrder::raw()->replaceOne(
+            ['WoNum' => (int)$WoObj->{'WoNum'}],
+            [
+                'WoNumStr' => (string)(int)$WoObj->,
+                'Priority' => (string)$WoObj->,
+                'OpenDate' => Carbon::createFromTimeString(substr($openDate,0,19), 'PST')->addHours(-1),
+                'ContactPhone' => (string)$WoObj->,
+                'Craft' => (string)$WoObj->,
+                'Crew' => (string)$WoObj->,
+                'Location' => (string)$WoObj->,
+                'LocationDesc' => (string)$WoObj->,
+                'Note2' => (string)$WoObj->,
+                'Request' => (string)$WoObj->,
+                'Status' => (string)$WoObj->,
+                'Room' => (string)$WoObj->,
+                'WoType' => (string)$WoObj->,
+                'ModifyDate' => Carbon::createFromTimeString(substr($modifyDate,0,19), 'PST')->addHours(-1),
+
+            ]
+            );
+        
+        
+    }
 }
