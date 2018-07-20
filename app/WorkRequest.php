@@ -6,10 +6,11 @@ class WorkRequest extends Eloquent {
     protected $collection = 'WorkRequest';
     protected $primaryKey = 'WrNum';
     public $timestamps = true;
+    protected $dates = ['CreateDate', 'ModifyDate', 'Date'];
     protected $fillable = [
         'Contact', 'Phone', 'CreatedBy',
-        'CreateDate', 'Location', 'Description',
-        'WrNum'
+        'CreateDate', 'Location', 'Date', 
+        'Description','Status', 'WrNum'
     ];
     
 
