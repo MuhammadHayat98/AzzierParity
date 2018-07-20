@@ -51,28 +51,9 @@ class WorkOrders extends Controller
         $WoObj = $request->get('WorkOrder');
         $openDate = (string)$WoObj->{'OpenDate'};
         $modifyDate = (string)$WoObj->{'ModifyDate'};
-        $wo = WorkOrder::raw()->replaceOne(
-            ['WoNum' => (int)$WoObj->{'WoNum'}],
-            [
-                'WoNumStr' => (string)(int)$WoObj->{'WoNum'},
-                'Priority' => (string)$WoObj->{'Priority'},
-                'OpenDate' => Carbon::createFromTimeString(substr($openDate,0,19), 'PST')->addHours(-1),
-                'ContactPhone' => (string)$WoObj->{'ContactPhone'},
-                'Craft' => (string)$WoObj->{'Craft'},
-                'Crew' => (string)$WoObj->{'Crew'},
-                'Location' => (string)$WoObj->{'Location'},
-                'LocationDesc' => (string)$WoObj->{'LocationDesc'},
-                'Note2' => (string)$WoObj->{'Note2'},
-                'Request' => (string)$WoObj->{'Request'},
-                'Status' => (string)$WoObj->{'Status'},
-                'Room' => (string)$WoObj->{'Room'},
-                'WoType' => (string)$WoObj->{'WoType'},
-                'ModifyDate' => Carbon::createFromTimeString(substr($modifyDate,0,19), 'PST')->addHours(-1),
-
-            ]
-            );
-            $wo->save();
-        
+        $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
+        $wo->ModifyDate = Carbon::createFromTimeString(substr($modifyDate,0,19), 'PST')->addHours(-1);
+        $wo->save();
         
     }
 }
