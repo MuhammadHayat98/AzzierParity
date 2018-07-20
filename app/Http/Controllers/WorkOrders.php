@@ -71,6 +71,7 @@ class WorkOrders extends Controller
 
             ]
             );
+            $wo->save();
         
         
     }
