@@ -38,3 +38,15 @@ $router->post('/UpdateWo', [
     'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'WorkOrders@update'
 ]);
+
+//Work request create
+$router->post('/CreateWr', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkRequests@create'
+]);
+
+//Work request update
+$router->post('/UpdateWr', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkRequests@update'
+]);
