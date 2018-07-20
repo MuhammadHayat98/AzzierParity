@@ -49,8 +49,8 @@ class WorkOrders extends Controller
 
     public function update(Request $request) {
         $WoObj = $request->get('WorkOrder');
-        $openDate = (string)$WoRequestObj->{'OpenDate'};
-        $modifyDate = (string)$WoRequestObj->{'ModifyDate'};
+        $openDate = (string)$WoObj->{'OpenDate'};
+        $modifyDate = (string)$WoObj->{'ModifyDate'};
         $wo = WorkOrder::raw()->replaceOne(
             ['WoNum' => (int)$WoObj->{'WoNum'}],
             [
