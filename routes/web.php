@@ -27,14 +27,14 @@ $router->get('/', function () use ($router) {
 //     return $wr->toJson();
 // });
 
-//Workorder create test
+//Workorder create 
 $router->post('/CreateWo', [
     'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'WorkOrders@create'
 ]);
 
-// //Workorder update test
-// $router->get('/findWo/{Wo}', function (int $Wo) use ($router) {
-//     $wo = Workorder::find($Wo);
-//     return $wo->toJson();
-// });
+//Workorder update
+$router->post('/UpdateWo', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkOrders@update'
+]);
