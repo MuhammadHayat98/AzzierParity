@@ -50,10 +50,11 @@ class WorkOrders extends Controller
     public function update(Request $request) {
         $WoObj = $request->get('WorkOrder');
         $openDate = (string)$WoObj->{'OpenDate'};
-        $modifyDate = (string)$WoObj->{'ModifyDate'};
+        $modifyDateStr = (string)$WoObj->{'ModifyDate'};
+        $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDate,0,19), 'PST')->addHours(-1) 
         $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
         //update function has this many lines because azzier does not let us know what fiels specifically have been updated
-        $wo->ModifyDate = Carbon::createFromTimeString(substr($modifyDate,0,19), 'PST')->addHours(-1);
+        $wo->ModifyDate = $modifyDateCarbon;
         $wo->Priority = (string)$WoObj->{'Priority'};
         $wo->ContactPhone = (string)$WoObj->{'ContactPhone'};
         $wo->Craft = (string)$WoObj->{'Craft'};
