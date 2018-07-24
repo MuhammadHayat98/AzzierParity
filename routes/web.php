@@ -10,40 +10,31 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-use App\WorkOrder as WorkOrder;
-use App\WorkRequest as WorkRequest;
-use Carbon\Carbon;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-//Workorder model test
-$router->get('/findWo/{Wo}', function (int $Wo) use ($router) {
-    $wo = Workorder::find($Wo);
-    return $wo->toJson();
-});
+//Workorder create 
+$router->post('/CreateWo', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkOrders@create'
+]);
 
-//Workrequest model test
-$router->get('/findWr/{Wr}', function (String $Wr) use ($router) {
-    $wr = WorkRequest::find($Wr);
-    return $wr->toJson();
-});
+//Workorder update
+$router->post('/UpdateWo', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkOrders@update'
+]);
 
-//Workorder create test
-$router->get('/CreateWo', function () use ($router) {
-    $wo = new WorkOrder();
-    $wo::create([
-        'WoNum' => 999999,
-        'WoNumStr' => '999999',
-        'Priority' => '3',
-        'OpenDate' => Carbon::createFromTimeString('06/25/2018 00:00:00', 'GMT')
+//Work request create
+$router->post('/CreateWr', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkRequests@create'
+]);
 
-    ]);
-    $wo->save();
-});
-
-// //Workorder update test
-// $router->get('/findWo/{Wo}', function (int $Wo) use ($router) {
-//     $wo = Workorder::find($Wo);
-//     return $wo->toJson();
-// });
+//Work request update
+$router->post('/UpdateWr', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'WorkRequests@update'
+]);

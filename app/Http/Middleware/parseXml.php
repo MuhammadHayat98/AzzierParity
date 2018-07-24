@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class ExampleMiddleware
+class parseXml
 {
     /**
      * Handle an incoming request.
@@ -14,7 +14,11 @@ class ExampleMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   
+        $xmlStr = trim($request->getContent());
+        $xml = new \SimpleXMLElement($xmlStr);
+        $responseObj = (isset($xml->{'WorkOrder'})) ? $xml->{'WorkOrder'} : $xml->{'WorkRequest'};
+        $request->attributes->set('responseObj', $responseObj);
         return $next($request);
     }
 }
