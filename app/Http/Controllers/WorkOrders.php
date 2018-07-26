@@ -39,7 +39,7 @@ class WorkOrders extends Controller
            'Location' => (string)$WoRequestObj->{'Location'},
            'LocationDesc' => (string)$WoRequestObj->{'LocationDesc'},
            'Note2' => (string)$WoRequestObj->{'Note2'},
-           'Request' => (string)$WoRequestObj->{'Requester'},
+           'Request' => (string)$WoRequestObj->{'Request'},
            'Status' => (string)$WoRequestObj->{'Status'},
            'Room' => (string)$WoRequestObj->{'Room'},
            'WoType' => (string)$WoRequestObj->{'WoType'} 
@@ -63,7 +63,7 @@ class WorkOrders extends Controller
         $wo->Location = (string)$WoObj->{'Location'};
         $wo->LocationDesc = (string)$WoObj->{'LocationDesc'};
         $wo->Note2 = (string)$WoObj->{'Note2'};
-        $wo->Request = (string)$WoObj->{'Requester'};
+        $wo->Request = (string)$WoObj->{'Request'};
         $wo->Status = (string)$WoObj->{'Status'};
         $wo->Room = (string)$WoObj->{'Room'};
         $wo->WoType = (string)$WoObj->{'WoType'};
