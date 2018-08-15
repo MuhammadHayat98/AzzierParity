@@ -3,7 +3,7 @@ namespace App;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class WorkRequest extends Eloquent {
-    protected $collection = 'WorkRequest';
+    protected $collection = 'WorkRequestTest';
     public $timestamps = true;
     protected $dates = ['CreateDate', 'ModifyDate', 'Date'];
     protected $fillable = [
