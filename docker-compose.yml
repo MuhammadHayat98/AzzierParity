@@ -1,0 +1,8 @@
+version: '2'
+services:
+  ppm-dev:
+    image: 'ainlavong/ppm-dev:laravel'
+    ports:
+      - '8080:80'
+    volumes:
+      - '.:/var/www/'
