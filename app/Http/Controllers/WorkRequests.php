@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\WorkRequest as WorkRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Log;
 
 class WorkRequests extends Controller
 {
@@ -20,6 +21,7 @@ class WorkRequests extends Controller
     public function create(Request $request) {
         
         $WrObj = $request->get('responseObj');
+        Log::info('Reponse object: ' . $WrObj);
         $createDateStr = (string)$WrObj->{'CreateDate'};
         $createDateCarbon = (strlen($createDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
         $dateStr = (string)$WrObj->{'Date'};
