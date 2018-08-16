@@ -36,7 +36,7 @@ class WorkRequests extends Controller
             'WrNum' => (string)$WrObj->{'WrNum'}
         ]);
         $newWr->save();
-        return;
+        
     }
 
     public function update(Request $request) {
