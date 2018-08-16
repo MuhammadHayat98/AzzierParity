@@ -18,12 +18,13 @@ class WorkRequests extends Controller
     }
 
     public function create(Request $request) {
-        $newWr = new WorkRequest();
+        
         $WrObj = $request->get('responseObj');
         $createDateStr = (string)$WrObj->{'CreateDate'};
         $createDateCarbon = (strlen($createDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
         $dateStr = (string)$WrObj->{'Date'};
         $dateCarbon = (strlen($dateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($dateStr,0,19), 'PST')->addHours(-1);
+        $newWr = new WorkRequest;
         $newWr::create([
             'Contact' => (string)$WrObj->{'Contact'},
             'Phone' => (string)$WrObj->{'Phone'},
