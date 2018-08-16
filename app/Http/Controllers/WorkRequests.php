@@ -39,20 +39,20 @@ class WorkRequests extends Controller
         
     }
 
-    public function update(Request $request) {
-        $WrObj = $request->get('responseObj');
-        $modifyDateStr = (string)$WrObj->{'ModifyDate'};
-        $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1);
-        $Wr = WorkRequest::where('WrNum', (string)$WrObj->{'WrNum'})->first();
-        $Wr->Contact = (string)$WrObj->{'Contact'};
-        $Wr->Phone = (string)$WrObj->{'Phone'};
-        $Wr->Location = (string)$WrObj->{'Location'};
-        $Wr->Description = (string)$WrObj->{'Description'};
-        $Wr->Status = (string)$WrObj->{'Status'};
-        $Wr->ModifyBy = (string)$WrObj->{'ModifyBy'};
-        $Wr->ModifyDate = $modifyDateCarbon;
-        $Wr->save();
-    }
+    // public function update(Request $request) {
+    //     $WrObj = $request->get('responseObj');
+    //     $modifyDateStr = (string)$WrObj->{'ModifyDate'};
+    //     $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1);
+    //     $Wr = WorkRequest::where('WrNum', (string)$WrObj->{'WrNum'})->first();
+    //     $Wr->Contact = (string)$WrObj->{'Contact'};
+    //     $Wr->Phone = (string)$WrObj->{'Phone'};
+    //     $Wr->Location = (string)$WrObj->{'Location'};
+    //     $Wr->Description = (string)$WrObj->{'Description'};
+    //     $Wr->Status = (string)$WrObj->{'Status'};
+    //     $Wr->ModifyBy = (string)$WrObj->{'ModifyBy'};
+    //     $Wr->ModifyDate = $modifyDateCarbon;
+    //     $Wr->save();
+    // }
 
 
 }
