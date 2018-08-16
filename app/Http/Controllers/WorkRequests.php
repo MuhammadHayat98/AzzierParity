@@ -12,10 +12,10 @@ class WorkRequests extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    // public function __construct()
+    // {
+    //     //
+    // }
 
     public function create(Request $request) {
         $newWr = new WorkRequest();
