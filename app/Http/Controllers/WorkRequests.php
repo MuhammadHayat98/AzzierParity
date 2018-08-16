@@ -18,7 +18,7 @@ class WorkRequests extends Controller
     }
 
     public function create(Request $request) {
-        $newWr = new WorkRequest;
+        $newWr = new WorkRequest();
         $WrObj = $request->get('responseObj');
         $createDateStr = (string)$WrObj->{'CreateDate'};
         $createDateCarbon = (strlen($createDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
