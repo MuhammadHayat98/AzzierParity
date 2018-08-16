@@ -42,7 +42,7 @@ class WorkRequests extends Controller
         $WrObj = $request->get('responseObj');
         $modifyDateStr = (string)$WrObj->{'ModifyDate'};
         $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1);
-        $Wr = WorkRequest::where('WrNum', (string)$WrObj->{'WrNum'})->first();
+        $Wr = WorkRequest::find((string)$WrObj->{'WrNum'});
         $Wr->Contact = (string)$WrObj->{'Contact'};
         $Wr->Phone = (string)$WrObj->{'Phone'};
         $Wr->Location = (string)$WrObj->{'Location'};

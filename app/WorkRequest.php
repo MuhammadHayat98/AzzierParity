@@ -4,6 +4,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class WorkRequest extends Eloquent {
     protected $collection = 'WorkRequestTest';
+    protected $primaryKey = 'WrNum';
     public $timestamps = true;
     protected $dates = ['CreateDate', 'ModifyDate', 'Date'];
     protected $fillable = [
