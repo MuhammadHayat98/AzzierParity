@@ -17,8 +17,7 @@ class parseXml
     {   
         $xmlStr = trim($request->getContent());
         $xml = new \SimpleXMLElement($xmlStr);
-        $responseObj = (isset($xml->{'WorkOrder'})) ? $xml->{'WorkOrder'} : $xml->{'WorkRequest'};
-        $request->attributes->set('responseObj', $responseObj);
+        $request->attributes->set('responseObj', $xml);
         return $next($request);
     }
 }

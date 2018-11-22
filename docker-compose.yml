@@ -3,6 +3,6 @@ services:
   ppm-dev:
     image: 'ainlavong/ppm-dev:laravel'
     ports:
-      - '8080:80'
+      - '8081:80'
     volumes:
       - '.:/var/www/'
