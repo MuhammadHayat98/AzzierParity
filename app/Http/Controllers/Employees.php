@@ -21,16 +21,21 @@ class Employees extends Controller
         //     'message' => 'yeet',
         //     'Status' => 201
         // ];
-        $newEmployee = new Employee();
-        $NewEmployeeObj = $request->get('responseObj');
-        //create employee function with employee object
+        $newEmployee = new Employee;
+        $newEmployeeObj = $request->get('responseObj');
+        //cast objects into array in order to index object like an array
+        $ar = (array)$newEmployeeObj;
+        //assigns number index to array keys
+        $keys = array_keys($ar);
+        //echo $ar[$keys[0]]->{'Empid'};
+        //create employee function with employee array
         $newEmployee::create([
-            'Empid' => (String)$newEmployeeObj->{'Empid'},
-            'FirstName'=>(String)$newEmployeeObj->{'FirstName'},
-            'LastName'=>(String)$newEmployeeObj->{'Lastname'},
-            'Craft' => (string)$newEmployeeObj->{'Craft'},
-            'HireDate'=>(String)$newEmployeeObj->{'HireDate'},
-            'Location'=>(String)$newEmployeeObj->{'Location'},
+            'Empid' => (String)$ar[$keys[0]]->{'Empid'},
+            'FirstName'=>(String)$ar[$keys[0]]->{'FirstName'},
+            'LastName'=>(String)$ar[$keys[0]]->{'LastName'},
+            'Craft' => (string)$ar[$keys[0]]->{'Craft'},
+            'HireDate'=>(String)$ar[$keys[0]]->{'HireDate'},
+            'Location'=>(String)$ar[$keys[0]]->{'Location'},
         ]);
         $newEmployee->save();
     }
