@@ -20,35 +20,39 @@ class WorkRequests extends Controller
     public function create(Request $request) {
         $newWr = new WorkRequest;
         $WrObj = $request->get('responseObj');
-        $createDateStr = (string)$WrObj->{'CreateDate'};
+        $ar = (array)$WrObj;
+        $keys = array_key($ar);
+        $createDateStr = (string)$ar[$keys[0]]->{'CreateDate'};
         $createDateCarbon = (strlen($createDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
-        $dateStr = (string)$WrObj->{'Date'};
+        $dateStr = (string)$ar[$keys[0]]->{'Date'};
         $dateCarbon = (strlen($dateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($dateStr,0,19), 'PST')->addHours(-1);
         $newWr::create([
-            'Contact' => (string)$WrObj->{'Contact'},
-            'Phone' => (string)$WrObj->{'Phone'},
-            'CreatedBy' => (string)$WrObj->{'CreatedBy'},
+            'Contact' => (string)$ar[$keys[0]]->{'Contact'},
+            'Phone' => (string)$ar[$keys[0]]->{'Phone'},
+            'CreatedBy' => (string)$ar[$keys[0]]->{'CreatedBy'},
             'CreateDate' => $createDateCarbon,
-            'Location' => (string)$WrObj->{'Location'},
+            'Location' => (string)$ar[$keys[0]]->{'Location'},
             'Date' => $dateCarbon,
-            'Description' => (string)$WrObj->{'Description'},
-            'Status' => (string)$WrObj->{'Status'},
-            'WrNum' => (string)$WrObj->{'WrNum'}
+            'Description' => (string)$ar[$keys[0]]->{'Description'},
+            'Status' => (string)$ar[$keys[0]]->{'Status'},
+            'WrNum' => (string)$ar[$keys[0]]->{'WrNum'}
         ]);
         $newWr->save();
     }
 
     public function update(Request $request) {
         $WrObj = $request->get('responseObj');
-        $modifyDateStr = (string)$WrObj->{'ModifyDate'};
+        $ar = (array)$WrObj;
+        $keys = array_key($ar);
+        $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
         $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1);
-        $Wr = WorkRequest::where('WrNum', (string)$WrObj->{'WrNum'})->first();
-        $Wr->Contact = (string)$WrObj->{'Contact'};
-        $Wr->Phone = (string)$WrObj->{'Phone'};
-        $Wr->Location = (string)$WrObj->{'Location'};
-        $Wr->Description = (string)$WrObj->{'Description'};
-        $Wr->Status = (string)$WrObj->{'Status'};
-        $Wr->ModifyBy = (string)$WrObj->{'ModifyBy'};
+        $Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
+        $Wr->Contact = (string)$ar[$keys[0]]->{'Contact'};
+        $Wr->Phone = (string)$ar[$keys[0]]->{'Phone'};
+        $Wr->Location = (string)$ar[$keys[0]]->{'Location'};
+        $Wr->Description = (string)$ar[$keys[0]]->{'Description'};
+        $Wr->Status = (string)$ar[$keys[0]]->{'Status'};
+        $Wr->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
         $Wr->ModifyDate = $modifyDateCarbon;
         $Wr->save();
     }
