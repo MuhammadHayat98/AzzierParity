@@ -33,6 +33,7 @@ class Employees extends Controller
             'FirstName'=>(String)$ar[$keys[0]]->{'FirstName'},
             'LastName'=>(String)$ar[$keys[0]]->{'LastName'},
             'Craft' => (string)$ar[$keys[0]]->{'Craft'},
+            'Rate' => (string)$ar[$keys[0]]->{'Rate'},
             'HireDate'=>(String)$ar[$keys[0]]->{'HireDate'},
             'Location'=>(String)$ar[$keys[0]]->{'Location'},
         ]);
@@ -47,11 +48,10 @@ class Employees extends Controller
         $newEmployee->FirstName = (String)$ar[$keys[0]]->{'FirstName'};
         $newEmployee->LastName = (String)$ar[$keys[0]]->{'LastName'};
         $newEmployee->craft = (String)$ar[$keys[0]]->{'Craft'};
+        $newEmployee->Rate = (string)$ar[$keys[0]]->{'Rate'};
         $newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
         $newEmployee->Location = (String)$ar[$keys[0]]->{'Location'};
         $newEmployee->save();
-        dd($newEmployee);
-
     }
    
 }
