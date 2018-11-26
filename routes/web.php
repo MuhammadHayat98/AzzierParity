@@ -38,12 +38,13 @@ $router->post('/UpdateWr', [
     'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'WorkRequests@update'
 ]);
-//
+//employee create 
 $router->post('/CreateEmp', [
     'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'Employees@create'
 ]);
-// $router->post('/UpdateEmp', [
-//     'middleware' => 'App\Http\Middleware\parseXml',
-//     'uses' => 'Employees@update'
-// ]);
+//employee update
+$router->put('/UpdateEmp', [
+    'middleware' => 'App\Http\Middleware\parseXml',
+    'uses' => 'Employees@update'
+]);
