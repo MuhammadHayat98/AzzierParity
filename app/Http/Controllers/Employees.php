@@ -39,9 +39,7 @@ class Employees extends Controller
             'Location'=>(String)$ar[$keys[0]]->{'Location'},
         ]);
         $newEmployee->save();
-        $fp = fopen('res.json', 'w');
-        fwrite($fp, $ar);
-        fclose($fp);
+       
     }
     public function update(Request $request){
         $newEmployeeObj = $request->get('responseObj');
