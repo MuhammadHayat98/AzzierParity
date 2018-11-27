@@ -21,7 +21,7 @@ class WorkRequests extends Controller
         $newWr = new WorkRequest;
         $WrObj = $request->get('responseObj');
         $ar = (array)$WrObj;
-        $keys = array_key($ar);
+        $keys = array_keys($ar);
         $createDateStr = (string)$ar[$keys[0]]->{'CreateDate'};
         $createDateCarbon = (strlen($createDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
         $dateStr = (string)$ar[$keys[0]]->{'Date'};
@@ -43,7 +43,7 @@ class WorkRequests extends Controller
     public function update(Request $request) {
         $WrObj = $request->get('responseObj');
         $ar = (array)$WrObj;
-        $keys = array_key($ar);
+        $keys = array_keys($ar);
         $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
         $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1);
         $Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
