@@ -39,6 +39,7 @@ class Employees extends Controller
             'Location'=>(String)$ar[$keys[0]]->{'Location'},
         ]);
         $newEmployee->save();
+        dd($ar);
     }
     public function update(Request $request){
         $newEmployeeObj = $request->get('responseObj');
