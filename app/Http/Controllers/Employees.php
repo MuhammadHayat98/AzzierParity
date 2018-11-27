@@ -34,7 +34,8 @@ class Employees extends Controller
             'LastName'=>(String)$ar[$keys[0]]->{'LastName'},
             'Craft' => (string)$ar[$keys[0]]->{'Craft'},
             'Rate' => (string)$ar[$keys[0]]->{'Rate'},
-            'HireDate'=>(String)$ar[$keys[0]]->{'HireDate'},
+            'HireDate'=> Carbon::now(),
+            //'HireDate'=>(String)$ar[$keys[0]]->{'HireDate'},
             'Location'=>(String)$ar[$keys[0]]->{'Location'},
         ]);
         $newEmployee->save();
@@ -47,7 +48,7 @@ class Employees extends Controller
         $newEmployee = Employee::find((String)$ar[$keys[0]]->{'Empid'});
         $newEmployee->FirstName = (String)$ar[$keys[0]]->{'FirstName'};
         $newEmployee->LastName = (String)$ar[$keys[0]]->{'LastName'};
-        $newEmployee->craft = (String)$ar[$keys[0]]->{'Craft'};
+        $newEmployee->Craft = (String)$ar[$keys[0]]->{'Craft'};
         $newEmployee->Rate = (string)$ar[$keys[0]]->{'Rate'};
         $newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
         $newEmployee->Location = (String)$ar[$keys[0]]->{'Location'};
