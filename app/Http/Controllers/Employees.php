@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Employee as Employee;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use storage/app;
 use Carbon\Carbon;
 class Employees extends Controller
 {
@@ -39,7 +40,7 @@ class Employees extends Controller
             'Location'=>(String)$ar[$keys[0]]->{'Location'},
         ]);
         $newEmployee->save();
-        dd($ar);
+        Storage::append('file.log', $ar);
     }
     public function update(Request $request){
         $newEmployeeObj = $request->get('responseObj');
