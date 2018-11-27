@@ -23,7 +23,7 @@ class WorkOrders extends Controller
         $newWo = new WorkOrder;
         $WoRequestObj = $request->get('responseObj');
         $ar = (array)$WoRequestObj;
-        $keys = array_key($ar);
+        $keys = array_keys($ar);
         $openDateStr = (string)$ar[$keys[0]]->{'OpenDate'};
         $openDateCarbon = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
         $newWo::create([
