@@ -45,7 +45,7 @@ class Employees extends Controller
         //created update employee function by accessing employee array
         $ar = (array)$newEmployeeObj;
         $keys = array_keys($ar);
-        $newEmployee = Employee::find((String)$ar[$keys[0]]->{'Empid'});
+        $newEmployee = Employee::where('Empid', (String)$ar[$keys[0]]->{'Empid'})->first();
         $newEmployee->FirstName = (String)$ar[$keys[0]]->{'FirstName'};
         $newEmployee->LastName = (String)$ar[$keys[0]]->{'LastName'};
         $newEmployee->Craft = (String)$ar[$keys[0]]->{'Craft'};
