@@ -28,17 +28,20 @@ class Employees extends Controller
         //assigns number index to array keys
         $keys = array_keys($ar);
         //create employee function with employee array
-        $newEmployee::create([
-            'Empid' => (String)$ar[$keys[0]]->{'Empid'},
-            'FirstName'=>(String)$ar[$keys[0]]->{'FirstName'},
-            'LastName'=>(String)$ar[$keys[0]]->{'LastName'},
-            'Craft' => (string)$ar[$keys[0]]->{'Craft'},
-            'Rate' => (string)$ar[$keys[0]]->{'Rate'},
-            'HireDate'=> Carbon::now(),
-            //'HireDate'=>(String)$ar[$keys[0]]->{'HireDate'},
-            'Location'=>(String)$ar[$keys[0]]->{'Location'},
-        ]);
-        $newEmployee->save();
+        // $newEmployee::create([
+        //     'Empid' => (String)$ar[$keys[0]]->{'Empid'},
+        //     'FirstName'=>(String)$ar[$keys[0]]->{'FirstName'},
+        //     'LastName'=>(String)$ar[$keys[0]]->{'LastName'},
+        //     'Craft' => (string)$ar[$keys[0]]->{'Craft'},
+        //     'Rate' => (string)$ar[$keys[0]]->{'Rate'},
+        //     'HireDate'=> Carbon::now(),
+        //     //'HireDate'=>(String)$ar[$keys[0]]->{'HireDate'},
+        //     'Location'=>(String)$ar[$keys[0]]->{'Location'},
+        // ]);
+        // $newEmployee->save();
+
+        $newEmployee::create((array)$ar[$keys[0]]);
+        return response()->json($newEmployeeObj, 201);
        
     }
     public function update(Request $request){
