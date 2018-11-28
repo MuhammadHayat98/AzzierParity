@@ -5,6 +5,7 @@ use App\Employee as Employee;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 class Employees extends Controller
 {
     /**
@@ -41,7 +42,7 @@ class Employees extends Controller
         // $newEmployee->save();
 
         $newEmployee::create((array)$ar[$keys[0]]);
-        
+        Log::debug($ar);
        
     }
     public function update(Request $request){
