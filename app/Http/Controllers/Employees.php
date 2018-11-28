@@ -23,7 +23,6 @@ class Employees extends Controller
         // ];
         $newEmployee = new Employee;
         $newEmployeeObj = $request->get('responseObj');
-        //$newEmployeeObj = $request->getContent();
         //cast objects into array in order to index object like an array
         $ar = (array)$newEmployeeObj;
         //assigns number index to array keys
