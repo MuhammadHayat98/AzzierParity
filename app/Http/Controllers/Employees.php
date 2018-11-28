@@ -28,6 +28,10 @@ class Employees extends Controller
         $ar = (array)$newEmployeeObj;
         //assigns number index to array keys
         $keys = array_keys($ar);
+        $newEmpArr = (array)$ar[$keys[0]];
+        $tmp = (String)$ar[$keys[0]]->{'HireDate'};
+        $newEmpArr['HireDate'] = (strlen($tmp) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($tmp,0,19));
+
         //create employee function with employee array
         // $newEmployee::create([
         //     'Empid' => (String)$ar[$keys[0]]->{'Empid'},
@@ -41,8 +45,8 @@ class Employees extends Controller
         // ]);
         // $newEmployee->save();
 
-        $newEmployee::create((array)$ar[$keys[0]]);
-        Log::debug($ar);
+        $newEmployee::create($newEmpArr);
+        Log::debug($newEmpArr);
        
     }
     public function update(Request $request){

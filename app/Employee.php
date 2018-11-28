@@ -8,7 +8,7 @@ class Employee extends Eloquent {
     //protected $primaryKey = 'Empid';
     public $timestamps = true;
 
-    //protected $dates = ['HireDate'];
+    protected $dates = ['HireDate'];
     protected $fillable = [
         'Empid', 'FirstName', 'LastName', 'HireDate',
         'Craft', 'Rate', 'Location'
