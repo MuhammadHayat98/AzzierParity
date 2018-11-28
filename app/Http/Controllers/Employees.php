@@ -41,7 +41,7 @@ class Employees extends Controller
         // $newEmployee->save();
 
         $newEmployee::create((array)$ar[$keys[0]]);
-        return response()->json($newEmployeeObj, 201);
+        
        
     }
     public function update(Request $request){
