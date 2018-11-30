@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Log;
 
 class WorkOrders extends Controller
 {
