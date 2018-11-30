@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class WorkOrders extends Controller
 {
@@ -24,29 +25,18 @@ class WorkOrders extends Controller
         $WoRequestObj = $request->get('responseObj');
         $ar = (array)$WoRequestObj;
         $keys = array_keys($ar);
-        $openDateStr = (string)$ar[$keys[0]]->{'OpenDate'};
-        $openDateCarbon = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
-        $newWo::create([
-           'WoNum' => (int)$ar[$keys[0]]->{'WoNum'},
-           //trunkated zeroes by casting strings as ints
-           'WoNumStr' => (string)(int)$ar[$keys[0]]->{'WoNum'},
-           'Priority' => (string)$ar[$keys[0]]->{'Priority'},
-           'OpenDate' => $openDateCarbon,
-           'ContactPhone' => (string)$ar[$keys[0]]->{'ContactPhone'},
-           'Craft' => (string)$ar[$keys[0]]->{'Craft'},
-           'Crew' => (string)$ar[$keys[0]]->{'Crew'},
-           'Location' => (string)$ar[$keys[0]]->{'Location'},
-           'LocationDesc' => (string)$ar[$keys[0]]->{'LocationDesc'},
-           'Note2' => (string)$ar[$keys[0]]->{'Note2'},
-           'Request' => (string)$ar[$keys[0]]->{'Request'},
-           'Status' => (string)$ar[$keys[0]]->{'Status'},
-           'Room' => (string)$ar[$keys[0]]->{'Room'},
-           'WoType' => (string)$ar[$keys[0]]->{'WoType'} 
-        ]);
-        $newWo->save();
-
+        $newWoJson = (array)$ar[$keys[0]];
+        if(WorkOrder::find((int)$newWoJson["WoNum"]) != null){
+            Log::debug("WoNum : " . (int)$newWoJson["WoNum"] . "already exist " . Carbon::now());
+            abort(400, "WoNum already exists");
+        }
+        else {
+            $openDateStr = (string)$ar[$keys[0]]["OpenDate"];
+            $newWoJson['OpenDate'] = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
+            $newWo::create($newWoJson);
+            return response()->json("created ", 201);
+        }
     }
-
     public function update(Request $request) {
         $WoObj = $request->get('responseObj');
         $ar = (array)$WoObj;
@@ -69,6 +59,5 @@ class WorkOrders extends Controller
         $wo->Room = (string)$ar[$keys[0]]->{'Room'};
         $wo->WoType = (string)$ar[$keys[0]]->{'WoType'};
         $wo->save();
-        
     }
 }
