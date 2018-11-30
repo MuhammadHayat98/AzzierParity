@@ -44,6 +44,7 @@ class Employees extends Controller
         $ar = (array)$newEmployeeObj;
         $keys = array_keys($ar);
         $newEmployee = Employee::where('Empid', (String)$ar[$keys[0]]->{'Empid'})->first();
+        Log::debug((string)$ar . " \n Azzier response: " . (string)$newEmployeeObj);
         $newEmployee->FirstName = (String)$ar[$keys[0]]->{'FirstName'};
         $newEmployee->LastName = (String)$ar[$keys[0]]->{'LastName'};
         $newEmployee->Craft = (String)$ar[$keys[0]]->{'Craft'};
@@ -51,7 +52,7 @@ class Employees extends Controller
         $newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
         $newEmployee->Location = (String)$ar[$keys[0]]->{'Location'};
         $newEmployee->save();
-        Log::debug($ar);
+        
         return response()->json("Updated", 200);
     }
 }
