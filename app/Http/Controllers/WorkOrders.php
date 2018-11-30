@@ -33,6 +33,8 @@ class WorkOrders extends Controller
         else {
             $openDateStr = (string)$ar[$keys[0]]["OpenDate"];
             $newWoJson['OpenDate'] = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
+            $newWoJson['WoNum'] = (int)$newWoJson['WoNum'];
+            $newWoJson['WoNumStr'] = (string)$newWoJson['WoNum'];
             $newWo::create($newWoJson);
             return response()->json("created ", 201);
         }
