@@ -49,7 +49,7 @@ class Employees extends Controller
         $newEmployee->LastName = (String)$ar[$keys[0]]->{'LastName'};
         $newEmployee->Craft = (String)$ar[$keys[0]]->{'Craft'};
         $newEmployee->Rate = (string)$ar[$keys[0]]->{'Rate'};
-        $newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
+        //$newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
         $newEmployee->Location = (String)$ar[$keys[0]]->{'Location'};
         $newEmployee->save();
         
