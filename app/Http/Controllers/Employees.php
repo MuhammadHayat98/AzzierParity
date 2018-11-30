@@ -51,6 +51,7 @@ class Employees extends Controller
         $newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
         $newEmployee->Location = (String)$ar[$keys[0]]->{'Location'};
         $newEmployee->save();
+        Log::debug($ar);
         return response()->json("Updated", 200);
     }
 }
