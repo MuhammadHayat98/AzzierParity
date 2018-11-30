@@ -20,29 +20,28 @@ class WorkOrders extends Controller
         //
     }
     public function create(Request $request) {
-        // $response = [
-        //     'message' => 'yeet',
-        //     'Status' => 201
-        // ];
         $newWo = new WorkOrder;
         $WoRequestObj = $request->get('responseObj');
-        $openDateStr = (string)$WoRequestObj->{'OpenDate'};
+        $ar = (array)$WoRequestObj;
+        $keys = array_keys($ar);
+        $openDateStr = (string)$ar[$keys[0]]->{'OpenDate'};
         $openDateCarbon = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
         $newWo::create([
-           'WoNum' => (int)$WoRequestObj->{'WoNum'},
-           'WoNumStr' => (string)(int)$WoRequestObj->{'WoNum'},
-           'Priority' => (string)$WoRequestObj->{'Priority'},
+           'WoNum' => (int)$ar[$keys[0]]->{'WoNum'},
+           //trunkated zeroes by casting strings as ints
+           'WoNumStr' => (string)(int)$ar[$keys[0]]->{'WoNum'},
+           'Priority' => (string)$ar[$keys[0]]->{'Priority'},
            'OpenDate' => $openDateCarbon,
-           'ContactPhone' => (string)$WoRequestObj->{'ContactPhone'},
-           'Craft' => (string)$WoRequestObj->{'Craft'},
-           'Crew' => (string)$WoRequestObj->{'Crew'},
-           'Location' => (string)$WoRequestObj->{'Location'},
-           'LocationDesc' => (string)$WoRequestObj->{'LocationDesc'},
-           'Note2' => (string)$WoRequestObj->{'Note2'},
-           'Request' => (string)$WoRequestObj->{'Request'},
-           'Status' => (string)$WoRequestObj->{'Status'},
-           'Room' => (string)$WoRequestObj->{'Room'},
-           'WoType' => (string)$WoRequestObj->{'WoType'} 
+           'ContactPhone' => (string)$ar[$keys[0]]->{'ContactPhone'},
+           'Craft' => (string)$ar[$keys[0]]->{'Craft'},
+           'Crew' => (string)$ar[$keys[0]]->{'Crew'},
+           'Location' => (string)$ar[$keys[0]]->{'Location'},
+           'LocationDesc' => (string)$ar[$keys[0]]->{'LocationDesc'},
+           'Note2' => (string)$ar[$keys[0]]->{'Note2'},
+           'Request' => (string)$ar[$keys[0]]->{'Request'},
+           'Status' => (string)$ar[$keys[0]]->{'Status'},
+           'Room' => (string)$ar[$keys[0]]->{'Room'},
+           'WoType' => (string)$ar[$keys[0]]->{'WoType'} 
         ]);
         $newWo->save();
 
@@ -50,23 +49,25 @@ class WorkOrders extends Controller
 
     public function update(Request $request) {
         $WoObj = $request->get('responseObj');
-        $modifyDateStr = (string)$WoObj->{'ModifyDate'};
+        $ar = (array)$WoObj;
+        $keys = array_keys($ar);
+        $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
         $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
-        $wo = WorkOrder::find((int)$WoObj->{'WoNum'});
+        $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
         //update function has this many lines because azzier does not let us know what fields specifically have been updated
         $wo->ModifyDate = $modifyDateCarbon;
-        $wo->ModifyBy = (string)$WoObj->{'ModifyBy'};
-        $wo->Priority = (string)$WoObj->{'Priority'};
-        $wo->ContactPhone = (string)$WoObj->{'ContactPhone'};
-        $wo->Craft = (string)$WoObj->{'Craft'};
-        $wo->Crew = (string)$WoObj->{'Crew'};
-        $wo->Location = (string)$WoObj->{'Location'};
-        $wo->LocationDesc = (string)$WoObj->{'LocationDesc'};
-        $wo->Note2 = (string)$WoObj->{'Note2'};
-        $wo->Request = (string)$WoObj->{'Request'};
-        $wo->Status = (string)$WoObj->{'Status'};
-        $wo->Room = (string)$WoObj->{'Room'};
-        $wo->WoType = (string)$WoObj->{'WoType'};
+        $wo->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
+        $wo->Priority = (string)$ar[$keys[0]]->{'Priority'};
+        $wo->ContactPhone = (string)$ar[$keys[0]]->{'ContactPhone'};
+        $wo->Craft = (string)$ar[$keys[0]]->{'Craft'};
+        $wo->Crew = (string)$ar[$keys[0]]->{'Crew'};
+        $wo->Location = (string)$ar[$keys[0]]->{'Location'};
+        $wo->LocationDesc = (string)$ar[$keys[0]]->{'LocationDesc'};
+        $wo->Note2 = (string)$ar[$keys[0]]->{'Note2'};
+        $wo->Request = (string)$ar[$keys[0]]->{'Request'};
+        $wo->Status = (string)$ar[$keys[0]]->{'Status'};
+        $wo->Room = (string)$ar[$keys[0]]->{'Room'};
+        $wo->WoType = (string)$ar[$keys[0]]->{'WoType'};
         $wo->save();
         
     }

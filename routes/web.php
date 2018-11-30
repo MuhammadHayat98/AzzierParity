@@ -44,7 +44,7 @@ $router->post('/CreateEmp', [
     'uses' => 'Employees@create'
 ]);
 //employee update
-$router->put('/UpdateEmp', [
+$router->post('/UpdateEmp', [
     'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'Employees@update'
 ]);
