@@ -39,27 +39,36 @@ class WorkOrders extends Controller
             return response()->json("created ", 201);
         }
     }
-    public function update(Request $request) {
-        $WoObj = $request->get('responseObj');
-        $ar = (array)$WoObj;
-        $keys = array_keys($ar);
-        $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
-        $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
-        $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
-        //update function has this many lines because azzier does not let us know what fields specifically have been updated
-        $wo->ModifyDate = $modifyDateCarbon;
-        $wo->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
-        $wo->Priority = (string)$ar[$keys[0]]->{'Priority'};
-        $wo->ContactPhone = (string)$ar[$keys[0]]->{'ContactPhone'};
-        $wo->Craft = (string)$ar[$keys[0]]->{'Craft'};
-        $wo->Crew = (string)$ar[$keys[0]]->{'Crew'};
-        $wo->Location = (string)$ar[$keys[0]]->{'Location'};
-        $wo->LocationDesc = (string)$ar[$keys[0]]->{'LocationDesc'};
-        $wo->Note2 = (string)$ar[$keys[0]]->{'Note2'};
-        $wo->Request = (string)$ar[$keys[0]]->{'Request'};
-        $wo->Status = (string)$ar[$keys[0]]->{'Status'};
-        $wo->Room = (string)$ar[$keys[0]]->{'Room'};
-        $wo->WoType = (string)$ar[$keys[0]]->{'WoType'};
-        $wo->save();
-    }
+    // public function update(Request $request) {
+    //     $WoObj = $request->get('responseObj');
+    //     $ar = (array)$WoObj;
+    //     $keys = array_keys($ar);
+    //     $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
+    //     $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
+    //     $wo = WorkOrder::findOrFail((int)$ar[$keys[0]]->{'WoNum'});
+    //     $wo->update();
+    //}
+    // public function update( Request $request) {
+    //     $WoObj = $request->get('responseObj');
+    //     $ar = (array)$WoObj;
+    //     $keys = array_keys($ar);
+    //     $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
+    //     $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
+    //     $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
+    //     //update function has this many lines because azzier does not let us know what fields specifically have been updated
+    //     $wo->ModifyDate = $modifyDateCarbon;
+    //     $wo->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
+    //     $wo->Priority = (string)$ar[$keys[0]]->{'Priority'};
+    //     $wo->ContactPhone = (string)$ar[$keys[0]]->{'ContactPhone'};
+    //     $wo->Craft = (string)$ar[$keys[0]]->{'Craft'};
+    //     $wo->Crew = (string)$ar[$keys[0]]->{'Crew'};
+    //     $wo->Location = (string)$ar[$keys[0]]->{'Location'};
+    //     $wo->LocationDesc = (string)$ar[$keys[0]]->{'LocationDesc'};
+    //     $wo->Note2 = (string)$ar[$keys[0]]->{'Note2'};
+    //     $wo->Request = (string)$ar[$keys[0]]->{'Request'};
+    //     $wo->Status = (string)$ar[$keys[0]]->{'Status'};
+    //     $wo->Room = (string)$ar[$keys[0]]->{'Room'};
+    //     $wo->WoType = (string)$ar[$keys[0]]->{'WoType'};
+    //     $wo->save();
+    // }
 }
