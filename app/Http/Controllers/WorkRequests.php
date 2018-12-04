@@ -56,20 +56,8 @@ class WorkRequests extends Controller
         $keys = array_keys($ar);
         $WrJson = (array)$ar[$keys[0]];
         $Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
-        Log::debug($ar[$keys[0]] . "\n");
         $Wr->update($WrJson);
         return response()->json("Update successful ", 201);
-        // $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
-        // $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1);
-        // $Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
-        // $Wr->Contact = (string)$ar[$keys[0]]->{'Contact'};
-        // $Wr->Phone = (string)$ar[$keys[0]]->{'Phone'};
-        // $Wr->Location = (string)$ar[$keys[0]]->{'Location'};
-        // $Wr->Description = (string)$ar[$keys[0]]->{'Description'};
-        // $Wr->Status = (string)$ar[$keys[0]]->{'Status'};
-        // $Wr->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
-        // $Wr->ModifyDate = $modifyDateCarbon;
-        // $Wr->save();
     }
 
 
