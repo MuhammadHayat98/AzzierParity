@@ -32,22 +32,24 @@ class WorkOrders extends Controller
         }
         else {
             $openDateStr = (string)$ar[$keys[0]]["OpenDate"];
-            $newWoJson['OpenDate'] = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
+            //commented out open date because the open date can be accessed by created at from azzier
+            //$newWoJson['OpenDate'] = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
             $newWoJson['WoNum'] = (int)$newWoJson['WoNum'];
             $newWoJson['WoNumStr'] = (string)$newWoJson['WoNum'];
             $newWo::create($newWoJson);
             return response()->json("created ", 201);
         }
     }
-    // public function update(Request $request) {
-    //     $WoObj = $request->get('responseObj');
-    //     $ar = (array)$WoObj;
-    //     $keys = array_keys($ar);
-    //     $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
-    //     $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
-    //     $wo = WorkOrder::findOrFail((int)$ar[$keys[0]]->{'WoNum'});
-    //     $wo->update();
-    //}
+    public function update(Request $request) {
+        $WoObj = $request->get('responseObj');
+        $ar = (array)$WoObj;
+        $keys = array_keys($ar);
+        $WoJson = (array)$ar[$keys[0]];
+        //$modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
+        //$modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
+        $wo = WorkOrder::findOrFail((int)$ar[$keys[0]]->{'WoNum'});
+        $wo->update($WoJson);
+    }
     // public function update( Request $request) {
     //     $WoObj = $request->get('responseObj');
     //     $ar = (array)$WoObj;

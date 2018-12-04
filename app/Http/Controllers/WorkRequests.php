@@ -29,11 +29,11 @@ class WorkRequests extends Controller
             abort(400, "WrNum already exists");
         }
         else {
-            $newWrJson[''] = (strlen($newWrJson) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
-            $dateStr = (string)$ar[$keys[0]]->{'Date'};
+            // $newWrJson[''] = (strlen($newWrJson) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($createDateStr,0,19), 'PST')->addHours(-1);
+            // $dateStr = (string)$ar[$keys[0]]->{'Date'};
             // $newWrJson = (strlen($dateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($dateStr,0,19), 'PST')->addHours(-1);
             $newWr::create($newWrJson);
-            return response()->json("created ", 201);
+            return response()->json("created " . $newWrJson['WrNum'], 201);
         }
         
         // $newWr::create([
