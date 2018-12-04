@@ -56,7 +56,7 @@ class WorkRequests extends Controller
         $keys = array_keys($ar);
         $WrJson = (array)$ar[$keys[0]];
         $Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
-        Log::debug((string)$ar . "\n" . (string)$Wr);
+        Log::debug($ar . "\n" . (string)$Wr);
         $Wr->update($WrJson);
         return response()->json("Update successful ", 201);
         // $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
