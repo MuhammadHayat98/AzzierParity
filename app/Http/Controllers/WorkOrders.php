@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use PHPUnit\Framework\Constraint\Exception;
 
 class WorkOrders extends Controller
 {
@@ -24,51 +26,39 @@ class WorkOrders extends Controller
         $WoRequestObj = $request->get('responseObj');
         $ar = (array)$WoRequestObj;
         $keys = array_keys($ar);
-        $openDateStr = (string)$ar[$keys[0]]->{'OpenDate'};
-        $openDateCarbon = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
-        $newWo::create([
-           'WoNum' => (int)$ar[$keys[0]]->{'WoNum'},
-           //trunkated zeroes by casting strings as ints
-           'WoNumStr' => (string)(int)$ar[$keys[0]]->{'WoNum'},
-           'Priority' => (string)$ar[$keys[0]]->{'Priority'},
-           'OpenDate' => $openDateCarbon,
-           'ContactPhone' => (string)$ar[$keys[0]]->{'ContactPhone'},
-           'Craft' => (string)$ar[$keys[0]]->{'Craft'},
-           'Crew' => (string)$ar[$keys[0]]->{'Crew'},
-           'Location' => (string)$ar[$keys[0]]->{'Location'},
-           'LocationDesc' => (string)$ar[$keys[0]]->{'LocationDesc'},
-           'Note2' => (string)$ar[$keys[0]]->{'Note2'},
-           'Request' => (string)$ar[$keys[0]]->{'Request'},
-           'Status' => (string)$ar[$keys[0]]->{'Status'},
-           'Room' => (string)$ar[$keys[0]]->{'Room'},
-           'WoType' => (string)$ar[$keys[0]]->{'WoType'} 
-        ]);
-        $newWo->save();
-
+        $newWoJson = (array)$ar[$keys[0]];
+        if(WorkOrder::find((int)$newWoJson["WoNum"]) != null){
+            Log::debug("WoNum : " . (int)$newWoJson["WoNum"] . "already exist " . Carbon::now());
+            abort(400, "WoNum already exists");
+        }
+        else {
+            $openDateStr = (string)$ar[$keys[0]]["OpenDate"];
+            //commented out open date because the open date can be accessed by created at from azzier
+            //$newWoJson['OpenDate'] = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
+            $newWoJson['WoNum'] = (int)$newWoJson['WoNum'];
+            $newWoJson['WoNumStr'] = (string)$newWoJson['WoNum'];
+            $newWo::create($newWoJson);
+            return response()->json("created ", 201);
+        }
     }
-
     public function update(Request $request) {
         $WoObj = $request->get('responseObj');
         $ar = (array)$WoObj;
         $keys = array_keys($ar);
-        $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
-        $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
-        $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
-        //update function has this many lines because azzier does not let us know what fields specifically have been updated
-        $wo->ModifyDate = $modifyDateCarbon;
-        $wo->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
-        $wo->Priority = (string)$ar[$keys[0]]->{'Priority'};
-        $wo->ContactPhone = (string)$ar[$keys[0]]->{'ContactPhone'};
-        $wo->Craft = (string)$ar[$keys[0]]->{'Craft'};
-        $wo->Crew = (string)$ar[$keys[0]]->{'Crew'};
-        $wo->Location = (string)$ar[$keys[0]]->{'Location'};
-        $wo->LocationDesc = (string)$ar[$keys[0]]->{'LocationDesc'};
-        $wo->Note2 = (string)$ar[$keys[0]]->{'Note2'};
-        $wo->Request = (string)$ar[$keys[0]]->{'Request'};
-        $wo->Status = (string)$ar[$keys[0]]->{'Status'};
-        $wo->Room = (string)$ar[$keys[0]]->{'Room'};
-        $wo->WoType = (string)$ar[$keys[0]]->{'WoType'};
-        $wo->save();
+        $WoJson = (array)$ar[$keys[0]];
+        if(WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'})!=null){
+            $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
+            $wo->update($WoJson);
+        }
+        else {
+            $WoJson['WoNum'] = (int)$WoJson['WoNum'];
+            $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
+            WorkOrder::create($WoJson);
+            Log::debug("Wo did not exist");
+        }
+            
+
         
     }
+    
 }

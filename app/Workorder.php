@@ -7,7 +7,7 @@ class WorkOrder extends Eloquent {
     protected $collection = 'WorkOrder';
     protected $primaryKey = 'WoNum';
     public $timestamps = true;
-    protected $dates = ['OpenDate', 'ModifyDate'];
+    //protected $dates = ['OpenDate', 'ModifyDate'];
     protected $fillable = [
         'WoNum', 'WoNumStr','Priority', 
         'OpenDate', 'ContactPhone', 'Craft',
