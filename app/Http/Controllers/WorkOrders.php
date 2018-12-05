@@ -51,6 +51,8 @@ class WorkOrders extends Controller
             $wo->update($WoJson);
         }
         else {
+            $WoJson['WoNum'] = (int)$WoJson['WoNum'];
+            $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
             WorkOrder::create($WoJson);
             Log::debug("Wo did not exist");
         }
