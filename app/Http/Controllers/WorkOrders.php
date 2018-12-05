@@ -8,6 +8,7 @@ use App\WorkOrder as WorkOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use PHPUnit\Framework\Constraint\Exception;
 
 class WorkOrders extends Controller
 {
@@ -45,32 +46,16 @@ class WorkOrders extends Controller
         $ar = (array)$WoObj;
         $keys = array_keys($ar);
         $WoJson = (array)$ar[$keys[0]];
-        //$modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
-        //$modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
-        $wo = WorkOrder::findOrFail((int)$ar[$keys[0]]->{'WoNum'});
-        $wo->update($WoJson);
+        try {
+            $wo = WorkOrder::findOrFail((int)$ar[$keys[0]]->{'WoNum'});
+            $wo->update($WoJson);
+        } 
+        catch(Exception $e){
+            WorkOrder::create($WoJson);
+            Log::debug("Wo did not exist");
+        }
+
+        
     }
-    // public function update( Request $request) {
-    //     $WoObj = $request->get('responseObj');
-    //     $ar = (array)$WoObj;
-    //     $keys = array_keys($ar);
-    //     $modifyDateStr = (string)$ar[$keys[0]]->{'ModifyDate'};
-    //     $modifyDateCarbon = (strlen($modifyDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($modifyDateStr,0,19), 'PST')->addHours(-1); 
-    //     $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
-    //     //update function has this many lines because azzier does not let us know what fields specifically have been updated
-    //     $wo->ModifyDate = $modifyDateCarbon;
-    //     $wo->ModifyBy = (string)$ar[$keys[0]]->{'ModifyBy'};
-    //     $wo->Priority = (string)$ar[$keys[0]]->{'Priority'};
-    //     $wo->ContactPhone = (string)$ar[$keys[0]]->{'ContactPhone'};
-    //     $wo->Craft = (string)$ar[$keys[0]]->{'Craft'};
-    //     $wo->Crew = (string)$ar[$keys[0]]->{'Crew'};
-    //     $wo->Location = (string)$ar[$keys[0]]->{'Location'};
-    //     $wo->LocationDesc = (string)$ar[$keys[0]]->{'LocationDesc'};
-    //     $wo->Note2 = (string)$ar[$keys[0]]->{'Note2'};
-    //     $wo->Request = (string)$ar[$keys[0]]->{'Request'};
-    //     $wo->Status = (string)$ar[$keys[0]]->{'Status'};
-    //     $wo->Room = (string)$ar[$keys[0]]->{'Room'};
-    //     $wo->WoType = (string)$ar[$keys[0]]->{'WoType'};
-    //     $wo->save();
-    // }
+    
 }

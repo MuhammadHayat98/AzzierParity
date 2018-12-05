@@ -50,9 +50,5 @@ class WorkRequests extends Controller
             return response()->json("Update successful ", 201);
         }
         
-        
-        //$Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
-        
-        
     }
 }
