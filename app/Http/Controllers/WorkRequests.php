@@ -40,15 +40,17 @@ class WorkRequests extends Controller
         $ar = (array)$WrObj;
         $keys = array_keys($ar);
         $WrJson = (array)$ar[$keys[0]];
-        try {
+        if(WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first() == null) {
+            Log::debug("Wr did not exist");
+            WorkRequest::create($WrJson);
+        }
+        else {
             $Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
             $Wr->update($WrJson);
             return response()->json("Update successful ", 201);
         }
-        catch(Exception $e) {
-            Log::debug("Caught excep" . $e->getMessage());
-            WorkRequest::create($WrJson);
-        }
+        
+        
         //$Wr = WorkRequest::where('WrNum', (string)$ar[$keys[0]]->{'WrNum'})->first();
         
         
