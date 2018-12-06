@@ -47,6 +47,8 @@ class WorkOrders extends Controller
         $keys = array_keys($ar);
         $WoJson = (array)$ar[$keys[0]];
         if(WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'})!=null){
+            $WoJson['WoNum'] = (int)$WoJson['WoNum'];
+            $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
             $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
             $wo->update($WoJson);
         }
