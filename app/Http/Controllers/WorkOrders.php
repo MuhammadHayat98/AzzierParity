@@ -46,15 +46,13 @@ class WorkOrders extends Controller
         $ar = (array)$WoObj;
         $keys = array_keys($ar);
         $WoJson = (array)$ar[$keys[0]];
+        $WoJson['WoNum'] = (int)$WoJson['WoNum'];
+        $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
         if(WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'})!=null){
-            $WoJson['WoNum'] = (int)$WoJson['WoNum'];
-            $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
             $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
             $wo->update($WoJson);
         }
         else {
-            $WoJson['WoNum'] = (int)$WoJson['WoNum'];
-            $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
             WorkOrder::create($WoJson);
             Log::debug("Wo did not exist");
         }
