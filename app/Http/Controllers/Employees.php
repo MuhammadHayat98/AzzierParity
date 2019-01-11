@@ -26,34 +26,17 @@ class Employees extends Controller
         $keys = array_keys($ar);
         //cast simplexml into json to allow use of eloquent create function
         $newEmpJson = (array)$ar[$keys[0]];
-        if(Employee::where('Empid', $newEmpJson['Empid'])->first() != null) {
-            Log::debug("Empid : " . $newEmpJson['Empid'] . " already exists homie " . Carbon::now());
-            abort(400, "Employee already exists");
-        }
-        else {
-        //parse HireDate to be converted into a carbon date object
-        $tmp = (String)$ar[$keys[0]]['HireDate'];
-        $newEmpJson['HireDate'] = (strlen($tmp) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($tmp,0,19));
         $newEmployee::create($newEmpJson);
         return response()->json("Created :)", 201);
-        }
     }
     public function update(Request $request){
+        $newEmployee = new Employee;
         $newEmployeeObj = $request->get('responseObj');
         //created update employee function by accessing employee array
         $ar = (array)$newEmployeeObj;
         $keys = array_keys($ar);
-        $newEmployee = Employee::where('Empid', (String)$ar[$keys[0]]->{'Empid'})->first();
-        Log::debug("Azzier response: " . $ar[$keys[0]]);
-        $newEmployee->FirstName = (String)$ar[$keys[0]]->{'FirstName'};
-        $newEmployee->LastName = (String)$ar[$keys[0]]->{'LastName'};
-        $newEmployee->Craft = (String)$ar[$keys[0]]->{'Craft'};
-        $newEmployee->Rate = (string)$ar[$keys[0]]->{'Rate'};
-        //commented hiredate because the hire date will never change
-        //$newEmployee->HireDate = (String)$ar[$keys[0]]->{'HireDate'};
-        $newEmployee->Location = (String)$ar[$keys[0]]->{'Location'};
-        $newEmployee->save();
-        
+        $newEmpJson = (array)$ar[$keys[0]];
+        $newEmployee::create($newEmpJson);
         return response()->json("Updated", 200);
     }
 }
