@@ -27,39 +27,23 @@ class WorkOrders extends Controller
         $ar = (array)$WoRequestObj;
         $keys = array_keys($ar);
         $newWoJson = (array)$ar[$keys[0]];
-        if(WorkOrder::find((int)$newWoJson["WoNum"]) != null){
-            Log::debug("WoNum : " . (int)$newWoJson["WoNum"] . "already exist " . Carbon::now());
-            abort(400, "WoNum already exists");
-        }
-        else {
-            $openDateStr = (string)$ar[$keys[0]]["OpenDate"];
-            //commented out open date because the open date can be accessed by created at from azzier
-            //$newWoJson['OpenDate'] = (strlen($openDateStr) == 0) ? Carbon::now() : Carbon::createFromTimeString(substr($openDateStr,0,19), 'PST')->addHours(-1);
-            $newWoJson['WoNum'] = (int)$newWoJson['WoNum'];
-            $newWoJson['WoNumStr'] = (string)$newWoJson['WoNum'];
-            $newWo::create($newWoJson);
-            return response()->json("created ", 201);
-        }
+        $newWo::create($newWoJson);
+       
     }
     public function update(Request $request) {
+        $newWo = new WorkOrder;
         $WoObj = $request->get('responseObj');
         $ar = (array)$WoObj;
         $keys = array_keys($ar);
         $WoJson = (array)$ar[$keys[0]];
-        $WoJson['WoNum'] = (int)$WoJson['WoNum'];
-        $WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
-        if(WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'})!=null){
-            Log::debug($WoJson['WoNum']);
-            $wo = WorkOrder::find((int)$ar[$keys[0]]->{'WoNum'});
-            $wo->update($WoJson);
-        }
-        else {
-            WorkOrder::create($WoJson);
-            Log::debug("Wo did not exist");
-        }
-            
+        //$WoJson['WoNumStr'] = (int)$WoJson['WoNumStr'];
+        //$WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
+        $newWo::create($WoJson);
+    }
 
-        
+    public function show() {
+        return WorkOrder::getAll();
+
     }
     
 }
