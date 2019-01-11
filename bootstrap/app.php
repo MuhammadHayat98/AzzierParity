@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
@@ -22,10 +21,10 @@ try {
 $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
-
+$app->configure('services');
 $app->withFacades();
-$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
- $app->withEloquent();
+$app->register(Nord\Lumen\DynamoDb\DynamoDBServiceProvider::class);
+//$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +65,9 @@ $app->singleton(
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
-$app->middleware([
-    App\Http\Middleware\parseXml::class
- ]);
+// $app->middleware([
+//     App\Http\Middleware\parseXml::class
+//  ]);
 
 /*
 |--------------------------------------------------------------------------
