@@ -4,7 +4,7 @@ namespace App;
 use \Nord\Lumen\DynamoDb\Domain\Model\DynamoDbModel as Eloquent;
 
 class WorkOrder extends Eloquent {
-    protected $table = 'test';
+    protected $table = 'WorkOrderTest';
     protected $primaryKey = 'WoNum';
     //public $timestamps = true;
     //protected $dates = ['OpenDate', 'ModifyDate'];
