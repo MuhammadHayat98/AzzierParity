@@ -11,7 +11,7 @@ class Employee extends Eloquent {
     //protected $dates = ['HireDate'];
     protected $fillable = [
         'Empid', 'FirstName', 'LastName', 'HireDate',
-        'Craft', 'Rate', 'Location'
+        'Craft', 'Rate', 'Location', 'ModifyDate' , 'ModifyBy'
     ];
 
     
