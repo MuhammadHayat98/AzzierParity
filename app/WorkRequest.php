@@ -3,7 +3,7 @@ namespace App;
 use \Nord\Lumen\DynamoDb\Domain\Model\DynamoDbModel as Eloquent;
 
 class WorkRequest extends Eloquent {
-    protected $table = 'WorkRequestTest';
+    protected $table = 'WorkRequests';
     protected $primarykey = 'WrNum';
     //public $timestamps = true;
     //will not use dates as actuall dates
