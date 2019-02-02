@@ -38,7 +38,7 @@ class WorkOrders extends Controller
         $WoJson = (array)$ar[$keys[0]];
         //$WoJson['WoNumStr'] = (int)$WoJson['WoNumStr'];
         //$WoJson['WoNumStr'] = (string)$WoJson['WoNum'];
-        $newWo::update($WoJson);
+        $newWo::create($WoJson);
     }
 
     public function show() {
