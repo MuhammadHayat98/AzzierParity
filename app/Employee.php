@@ -4,7 +4,7 @@ namespace App;
 use \Nord\Lumen\DynamoDb\Domain\Model\DynamoDbModel as Eloquent;
 
 class Employee extends Eloquent {
-    protected $table = 'EmployeeTest';
+    protected $table = 'Employees';
     protected $primaryKey = 'Empid';
     //public $timestamps = true;
 
