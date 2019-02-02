@@ -48,3 +48,4 @@ $router->post('/UpdateEmp', [
     'middleware' => 'App\Http\Middleware\parseXml',
     'uses' => 'Employees@update'
 ]);
+$router->get('/show', ['uses' => 'WorkOrders@show']);

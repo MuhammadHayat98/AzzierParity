@@ -1,17 +1,16 @@
 <?php
 namespace App;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use \Nord\Lumen\DynamoDb\Domain\Model\DynamoDbModel as Eloquent;
 
 class WorkRequest extends Eloquent {
-    protected $collection = 'WorkRequest';
-    public $timestamps = true;
+    protected $table = 'WorkRequestTest';
+    protected $primarykey = 'WrNum';
+    //public $timestamps = true;
     //will not use dates as actuall dates
     //protected $dates = ['CreateDate', 'ModifyDate', 'Date'];
     protected $fillable = [
         'Contact', 'Phone', 'CreatedBy',
         'CreateDate', 'Location', 'Date', 
-        'Description','Status', 'WrNum'
+        'Description','Status', 'WrNum', 'ModifyDate','ModifyBy'
     ];
-    
-
 }
