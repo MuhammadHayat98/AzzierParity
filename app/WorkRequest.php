@@ -10,7 +10,11 @@ class WorkRequest extends Eloquent {
     //protected $dates = ['CreateDate', 'ModifyDate', 'Date'];
     protected $fillable = [
         'Contact', 'Phone', 'CreatedBy',
-        'CreateDate', 'Location', 'Date', 
-        'Description','Status', 'WrNum', 'ModifyDate','ModifyBy'
+        'CreationDate', 'Location', 'Date', 
+        'Description','Status', 'WrNum', 
+        'ModifyDate','ModifyBy', 'Requester',
+        'Request','Crew','LocationDesc',
+        'OpenDate','AssignDate','WoType',
+        'Priority',
     ];
 }
