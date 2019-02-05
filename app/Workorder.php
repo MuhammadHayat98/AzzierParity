@@ -13,7 +13,7 @@ class WorkOrder extends Eloquent {
         'OpenDate', 'ContactPhone', 'Craft',
         'Crew', 'Location','LocationDesc', 
         'Note2', 'Request','Status', 
-        'Room', 'WoType', 'ModifyDate','ModifyBy'
+        'Room', 'WoType', 'ModifyDate','ModifyBy', 'CreatedBy'
 
     ];
 
